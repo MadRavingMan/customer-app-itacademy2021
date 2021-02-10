@@ -2,6 +2,8 @@ package com.enorkus.academy.controller;
 
 import com.enorkus.academy.entity.Customer;
 import com.enorkus.academy.repository.CustomerRepository;
+import com.enorkus.academy.repository.MemoryCustomerRepository;
+import com.enorkus.academy.service.CustomerService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,24 +12,24 @@ import java.util.List;
 @RequestMapping("/api")
 public class MainController {
 
-    private CustomerRepository customerRepository;
+    private CustomerService customerService;
 
     public MainController() {
-        customerRepository = new CustomerRepository();
+        customerService = new CustomerService();
     }
 
     @RequestMapping("/customer/all")
     public List<Customer> fetchCustomers() {
-        return customerRepository.findAll();
+        return customerService.fetchCustomers();
     }
 
     @PostMapping("/customer/insert")
     public void insertCustomer(@RequestBody Customer customer) {
-        customerRepository.insert(customer);
+        customerService.insertCustomer(customer);
     }
 
     @DeleteMapping("/customer/delete/{customerId}")
     public void deleteCustomer(@PathVariable String customerId) {
-        customerRepository.deleteById(customerId);
+        customerService.deleteCustomer(customerId);
     }
 }
