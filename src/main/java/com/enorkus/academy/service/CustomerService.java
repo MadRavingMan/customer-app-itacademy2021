@@ -3,6 +3,7 @@ package com.enorkus.academy.service;
 import com.enorkus.academy.entity.Customer;
 import com.enorkus.academy.repository.CustomerRepository;
 import com.enorkus.academy.repository.MemoryCustomerRepository;
+import com.enorkus.academy.validator.CustomerValidator;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -10,8 +11,10 @@ import java.util.List;
 public class CustomerService {
 
     private CustomerRepository customerRepository;
+    private CustomerValidator customerValidator;
 
     public CustomerService() {
+        customerValidator = new CustomerValidator();
         customerRepository = new MemoryCustomerRepository();
     }
 
@@ -20,6 +23,7 @@ public class CustomerService {
     }
 
     public void insertCustomer(Customer customer) {
+        customerValidator.validateMandatoryValues(customer.getFirstName(), customer.getLastName(), customer.getPersonalNumber());
         Customer newCustomer = new Customer.CustomerBuilder(
                 capitalizeFirstLetter(customer.getFirstName()),
                 capitalizeFirstLetter(customer.getLastName()),
@@ -33,6 +37,7 @@ public class CustomerService {
                 .middleName(customer.getMiddleName())
                 .monthlyIncome(customer.getMonthlyIncome())
                 .build();
+
 
         customerRepository.insert(newCustomer);
     }
