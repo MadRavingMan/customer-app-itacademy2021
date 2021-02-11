@@ -4,7 +4,6 @@ import com.enorkus.academy.entity.Customer;
 import com.enorkus.academy.repository.CustomerRepository;
 import com.enorkus.academy.repository.MemoryCustomerRepository;
 import com.enorkus.academy.validator.CustomerValidator;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Locale;

@@ -1,8 +1,6 @@
 package com.enorkus.academy.controller;
 
 import com.enorkus.academy.entity.Customer;
-import com.enorkus.academy.repository.CustomerRepository;
-import com.enorkus.academy.repository.MemoryCustomerRepository;
 import com.enorkus.academy.service.CustomerService;
 import org.springframework.web.bind.annotation.*;
 
