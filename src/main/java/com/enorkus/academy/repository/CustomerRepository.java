@@ -4,16 +4,16 @@ import com.enorkus.academy.entity.Customer;
 
 import java.util.List;
 
+
 public interface CustomerRepository {
 
-    public default List<Customer> findAll() {
-        return null;
-    }
+    public List<Customer> findAll();
 
-    public default void insert(Customer customer) {
-    }
 
-    public default void deleteById(String customerId) {
+    public void insert(Customer customer);
 
-    }
+
+    public void deleteById(String customerId);
+
+
 }

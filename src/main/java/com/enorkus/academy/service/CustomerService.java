@@ -10,8 +10,8 @@ import java.util.Locale;
 
 public class CustomerService {
 
-    private CustomerRepository customerRepository;
-    private CustomerValidator customerValidator;
+    CustomerRepository customerRepository;
+    CustomerValidator customerValidator;
 
     public CustomerService() {
         customerValidator = new CustomerValidator();
@@ -46,18 +46,19 @@ public class CustomerService {
     }
 
     private String capitalizeFirstLetter(String str) {
-        String capitalizeFirstLetter = "";
         if (str.length() > 0) {
-            capitalizeFirstLetter = str.substring(0, 1).toUpperCase() + str.substring(1);
+            return str.substring(0, 1).toUpperCase() + str.substring(1);
+        } else {
+            return str;
         }
 
-        return capitalizeFirstLetter;
     }
 
     private String addDashAfterFour(String str) {
         String addedDash = str;
         if (str.length() > 4) {
-            addedDash = str.substring(0, 4) + '-' + str.substring(4);
+            if (str.charAt(4) != '-')
+                addedDash = str.substring(0, 4) + '-' + str.substring(4);
         }
         return addedDash;
     }
