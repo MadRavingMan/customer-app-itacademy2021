@@ -7,6 +7,7 @@ import com.enorkus.academy.validator.CustomerValidator;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Locale;
 
 public class CustomerService {
 
@@ -23,21 +24,20 @@ public class CustomerService {
     }
 
     public void insertCustomer(Customer customer) {
-        customerValidator.validateMandatoryValues(customer.getFirstName(), customer.getLastName(), customer.getPersonalNumber());
+        customerValidator.validateCustomer(customer);
         Customer newCustomer = new Customer.CustomerBuilder(
                 capitalizeFirstLetter(customer.getFirstName()),
                 capitalizeFirstLetter(customer.getLastName()),
                 addDashAfterFour(customer.getPersonalNumber()))
                 .age(customer.getAge())
                 .city(customer.getCity())
-                .countryCode(customer.getCountryCode())
+                .countryCode(customer.getCountryCode().toUpperCase(Locale.ROOT))
                 .employer(customer.getEmployer())
                 .gender(customer.getGender())
                 .maritalStatus(customer.getMaritalStatus())
                 .middleName(customer.getMiddleName())
                 .monthlyIncome(customer.getMonthlyIncome())
                 .build();
-
 
         customerRepository.insert(newCustomer);
     }
